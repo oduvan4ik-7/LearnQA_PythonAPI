@@ -16,9 +16,9 @@ types = ['GET', 'POST', 'PUT', 'DELETE']  # , 'HEAD', 'PATCH' - всегда 400
 for real_type in types:
     for type_in_param in types:
         if real_type == 'GET':
-            r = requests.request(url=url_compare_types, method=real_type, params={'method': type_in_param})
+            r = requests.get(url=url_compare_types, params={'method': type_in_param})
         else:
-            r = requests.request(url=url_compare_types, method=real_type, data={'method': type_in_param})
+            r = requests.request(url=url_compare_types, method=real_type, json={'method': type_in_param})
 
         if (real_type == type_in_param) != (r.text == '{"success":"!"}'):
             print(f"4. Несоответствие! выполнен метод {real_type}, с параметром method={type_in_param}, результат: {r.text} ")
