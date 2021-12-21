@@ -53,4 +53,3 @@ for password in passwords:
         print(f"login:{login}, password: {password}, response: {response2.text}")
         break
 print("finish!")
-
