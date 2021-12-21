@@ -49,16 +49,16 @@ class TestUserAgent:
             print("response is not a json format")
 
         assert 'platform' in response_json, "There is no attribute 'platform' in the response"
-        assert response_json['platform'] == expected_platform, f"Incorrect platform: '{response_json['platform']}' " \
-                                                               f"instead of '{expected_platform}', params #{params['number']}"
+        assert response_json['platform'] == expected_platform, f"Incorrect platform: {response_json['platform']} " \
+                                                               f"instead of {expected_platform}, params #{params['number']}"
 
         assert 'browser' in response_json, "There is no attribute 'browser' in the response"
-        assert response_json['browser'] == expected_browser, f"Incorrect browser: '{response_json['browser']}' " \
-                                                             f"instead of '{expected_browser}', params #{params['number']}"
+        assert response_json['browser'] == expected_browser, f"Incorrect browser: {response_json['browser']} " \
+                                                             f"instead of {expected_browser}, params #{params['number']}"
 
         assert 'device' in response_json, "There is no attribute 'device' in the response"
-        assert response_json['device'] == expected_device, f"Incorrect device: '{response_json['device']}' " \
-                                                           f"instead of '{expected_device}', params #{params['number']}"
+        assert response_json['device'] == expected_device, f"Incorrect device: {response_json['device']} " \
+                                                           f"instead of {expected_device}, params #{params['number']}"
 
 
 

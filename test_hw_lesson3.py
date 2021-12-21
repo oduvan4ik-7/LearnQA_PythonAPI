@@ -1,4 +1,4 @@
-import requests
+import  requests
 
 
 # python -m pytest -s test_hw_lesson3.py -k phrase
