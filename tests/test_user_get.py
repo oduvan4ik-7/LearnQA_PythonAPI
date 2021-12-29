@@ -45,6 +45,8 @@ class TestUserGet(BaseCase):
         data_for_post = self.prepare_registration_data()
         response2 = MyRequests.post("/user/", data=data_for_post)
         Assertions.assert_code_status(response2, 200)
+        Assertions.assert_json_has_key(response1, "id")
+
         user_id = self.get_json_value(response2, "id")
 
         response3 = MyRequests.get(f"/user/{user_id}",
