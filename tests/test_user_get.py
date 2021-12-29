@@ -50,7 +50,6 @@ class TestUserGet(BaseCase):
         response3 = MyRequests.get(f"/user/{user_id}",
                                    headers={"x-csrf-token": token},
                                    cookies={"auth_sid": auth_sid})
-        print(response3.content)
 
         Assertions.assert_json_has_key(response3, "username")
         Assertions.assert_json_has_not_keys(response3, ["email", "firstName", "lastName"])
