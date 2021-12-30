@@ -3,9 +3,11 @@ from lib.assertions import Assertions
 from lib.my_requests import MyRequests
 import random
 import string
+import allure
 
 
 # python -m pytest -s --alluredir=test_results/ tests/test_user_edit.py
+@allure.epic("Actions with user")
 class TestUserEdit(BaseCase):
 
     def create_user(self):
@@ -27,6 +29,12 @@ class TestUserEdit(BaseCase):
         token = self.get_header(response, "x-csrf-token")
         return auth_sid, token
 
+    @allure.feature("Editing")
+    @allure.title("User editing")
+    @allure.description("This test successfully edits just created user")
+    @allure.severity("BLOCKER")
+    @allure.link("https://software-testing.ru/lms/my/")
+    @allure.issue("UFS-55577")
     def test_edit_just_created_user(self):
         # REGISTER
         register_data = self.prepare_registration_data()
@@ -70,6 +78,8 @@ class TestUserEdit(BaseCase):
             response4, "firstName", new_name, "Wrong name of the user after edit"
         )
 
+    @allure.feature("Editing")
+    @allure.story("Editing without authorization")
     def test_edit_just_created_user_not_auth(self):
         # REGISTER
         user = self.create_user()
@@ -83,6 +93,9 @@ class TestUserEdit(BaseCase):
         assert r_edit.content.decode("utf-8") == f"Auth token not supplied", \
             f"Unexpected response content: {r_edit.content}"
 
+    @allure.feature("Editing")
+    @allure.story("Editing another user")
+    @allure.testcase("https://software-testing.ru/lms/my/", "test_testcase")
     def test_edit_just_created_user_auth_as_other(self):
         # REGISTER USER
         user = self.create_user()
@@ -132,6 +145,8 @@ class TestUserEdit(BaseCase):
 
         # изменяется сам редактор, а не подопытный
 
+    @allure.feature("Editing")
+    @allure.story("Editing with incorrect email")
     def test_edit_user_incorrect_email(self):
         # REGISTER
         user = self.create_user()
@@ -164,6 +179,8 @@ class TestUserEdit(BaseCase):
 
         Assertions.assert_json_value_by_name(r_get, 'email', user['email'], "email has been changed!")
 
+    @allure.feature("Editing")
+    @allure.story("Editing with incorrect firstName")
     def test_edit_user_too_short_first_name(self):
         # REGISTER
         user = self.create_user()
